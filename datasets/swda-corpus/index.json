@@ -1,0 +1,1 @@
+{"utterances-index": {"tag": "<class 'str'>", "pos": "<class 'str'>"}, "users-index": {"sex": "<class 'str'>", "education": "<class 'int'>", "birth_year": "<class 'int'>", "dialect_area": "<class 'str'>"}, "conversations-index": {}, "overall-index": {"metadata": "bin", "name": "<class 'str'>"}, "version": 1}
