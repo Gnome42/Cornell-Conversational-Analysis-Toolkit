@@ -20,6 +20,10 @@ For each utterance, we include:
 * reply_to: id of the utterance this replies to
 * timestamp: timestamp of the utterance (not applicable in Switchboard, set to *None*)
 * text: text of the utterance
+* metadata
+  * tag: the DAMSL act-tag of the utterance
+  * pos: the part-of-speech tagged portion of the utterance
+  * trees: nltk-parsed tree of the utterance
 
 ### Conversation-Level Information
 Conversations are indexed by the first ID of the conversation (i.e. 4325-0, 2451-0, 4171-0, etc). The conversation IDs can be found using: 
