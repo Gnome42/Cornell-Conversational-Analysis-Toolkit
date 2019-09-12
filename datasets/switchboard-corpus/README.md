@@ -40,7 +40,7 @@ The metadata associated with the corpus includes:
 To download the corpus:
 ```python
 >>> from convokit import Corpus, download
->>> corpus = Corpus(filename=download("swda-corpus"))
+>>> corpus = Corpus(filename=download("switchboard-corpus"))
 ```
 
 In this dataset, there are 440 users, 221616 utterances, and 1155 conversations.
