@@ -8,7 +8,7 @@ The original dataset, paper, and accompanying information can be found at [http:
 ### User-Level Information
 In this dataset, users are the participants in the phone conversations (two per conversation). The user index is the same as that in the original dataset. We also provide the following user information in the metadata:
 * sex: user sex, 'MALE' or 'FEMALE'
-* education: the user's level of education (0, 1, 2, 3, or 9)
+* education: the user's level of education. Options are 0 (less than high school), 1 (less than college), 2 (college), 3 (more than college), and 9 (unknown).
 * birth_year: the user's birth year (4-digit year)
 * dialect_area: one of the following dialect areas: MIXED, NEW ENGLAND, NORTH MIDLAND, NORTHERN, NYC, SOUTH MIDLAND, SOUTHERN, UNK, WESTERN
 
