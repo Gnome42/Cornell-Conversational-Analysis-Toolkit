@@ -37,8 +37,8 @@ The metadata associated with the corpus includes:
 * topic_description: a short description of the conversation prompt
 * length: length of the conversation in minutes
 * prompt: a long description of the conversation prompt
-* from_caller: id of the from-caller (A)
-* to_caller: id of the to-caller (B)
+* from_caller: id of the from-caller (A) of the conversation
+* to_caller: id of the to-caller (B) of the conversation
 
 ## Usage and Stats
 To download the corpus:
