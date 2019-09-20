@@ -27,3 +27,4 @@ examples/hyperconvo/.ipynb_checkpoints
 venv/
 *.iml
 venv-triadmotif/
+datasets/switchboard-corpus/Sample_of_dialogue_acts.xlsx
