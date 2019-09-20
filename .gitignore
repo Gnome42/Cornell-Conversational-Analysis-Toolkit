@@ -28,3 +28,9 @@ venv/
 *.iml
 venv-triadmotif/
 datasets/switchboard-corpus/Sample_of_dialogue_acts.xlsx
+*.ipynb_checkpoints
+swda.py
+swda_functions.py
+metadata_processor.py
+datasets/switchboard_corpus/corpus/*
+datasets/switchboard_corpus/metadata_processor.py
