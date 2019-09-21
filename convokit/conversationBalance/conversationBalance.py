@@ -8,11 +8,9 @@ class ConversationBalance(Transformer):
 	Calculates the balance of a conversation by computing the ratio of tokens 
 	spoken between a pair of users. The Conversation-level balance is defined 
 	in conversation metadata for each pair of users (A,B) as the ratio: 
-			(# tokens by A)/(# tokens by B)
+			(# tokens by A)/(# tokens by A + # tokens by B)
 	This is stored as a Numpy array of size NxN, where N is the number of Users.
-	In cell (X, Y) of the array is the balance between users X and Y. Note
-	that the value at cell (X,Y) is the inverse of the value at cell (Y,X)
-	and that the value at cell (X,X) is always 1.
+	In cell (X, Y) of the array is the balance between users X and Y. 
 
 	Additionally, statement-pair balance is computed. We define statements as
 	groups of consecutive utterances spoken by the same user. The balance
@@ -78,17 +76,17 @@ class ConversationBalance(Transformer):
 				cur_len = corpus.utterances[utt_id_cur].meta['statement_len']
 				next_len = corpus.utterances[utt_id_next].meta['statement_len']
 
-				if next_len == 0:
-					sment_balance = 1
+				if cur_len+next_len == 0:
+				 	sment_balance = 0.5
 				else:
-					sment_balance = cur_len/next_len
+					sment_balance = cur_len/(cur_len+next_len)
 				corpus.utterances[utt_id_cur].meta['statement_balance'] = sment_balance
 
 			# Update conversation-level metadata with balance ratio
 			convo_balance = np.zeros((len(user_order), len(user_order)))
 			for i, A in enumerate(user_order):
 				for j, B in enumerate(user_order):
-					convo_balance[i,j] = user_tokens[A]/user_tokens[B]
+					convo_balance[i,j] = user_tokens[A]/(user_tokens[A]+user_tokens[B])
 			c._meta['conversation_balance'] = convo_balance
 
 			# Add the usernames to the conversation metadata
