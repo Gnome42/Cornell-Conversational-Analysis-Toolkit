@@ -40,8 +40,7 @@ class VocabOverlap(Transformer):
 		for convo in corpus.iter_conversations():
 	
 			users = convo.get_usernames()
-			vocabA = defaultdict(int)
-			vocabB = defaultdict(int)
+			vocabs = {u:defaultdict(int) for u in users}
 	
 			for utt in convo.iter_utterances():
 		
@@ -50,28 +49,26 @@ class VocabOverlap(Transformer):
 		
 				# Filter out stop words
 				tokens = [token for token in tokens if not token in stop_words]
-		
-				if utt.user.name == users[0]: # Utterance belongs to user A
-					for token in tokens:
-						vocabA[token] += 1
-				else: # Utterance belongs to user B
-					for token in tokens:
-						vocabB[token] += 1
+				
+				for token in tokens:
+					vocabs[utt.user.name][token] += 1
 
-			overlapVocab = set(vocabA.keys()).intersection(set(vocabB.keys()))
+			
+			overlapVocab = set(list(vocabs.values())[0])
+			for u, vocab in vocabs.items():
+				overlapVocab = overlapVocab.intersection(set(vocab))
 	
-			# Compute total frequency of overlaps
+			# Compute frequency of overlaps and total number of tokens
 			overlap = 0
-			for k, v in vocabA.items():
-				if k in overlapVocab:
-					overlap += v
-			for k, v in vocabB.items():
-				if k in overlapVocab:
-					overlap += v
+			total = 0
+			for vocab in vocabs.values():
+				total += sum(vocab.values())
+				for k, v in vocab.items():
+					if k in overlapVocab:
+						overlap += v
 		
-			# Compute total number of tokens used
-			total = sum(vocabA.values())+sum(vocabB.values())
-			convo.add_meta('vocabulary_overlap', overlap/total)
+			convo.add_meta('vocabulary_overlap', {'vocab': overlapVocab, \
+				'ratio': overlap/total})
 
 	
 		return corpus
