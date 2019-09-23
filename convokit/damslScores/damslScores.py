@@ -32,8 +32,10 @@ class DAMSLScores(Transformer):
 			score = 0    
 	
 			for utt in convo.iter_utterances():
-		
-				score += self.rubric[utt.meta['tag']]
+				try:
+					score += self.rubric[utt.meta['tag']]
+				except KeyError:
+					continue
 		
 			convo.add_meta('damsl_score', score/length)
 	
