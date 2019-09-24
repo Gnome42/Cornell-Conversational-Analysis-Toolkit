@@ -32,6 +32,29 @@ class VocabOverlap(Transformer):
 
 		return [token.lower() for token in tokens]
 
+
+	# Iterate thru different vocabularies to find the intersection and the overlap ratio
+	def _compute_overlap(self, vocabs):
+
+		overlapVocab = set(list(vocabs.values())[0])
+		for u, vocab in vocabs.items():
+			overlapVocab = overlapVocab.intersection(set(vocab))
+	
+		# Compute frequency of overlaps and total number of tokens
+		overlap = 0
+		total = 0
+		for vocab in vocabs.values():
+			total += sum(vocab.values())
+			for k, v in vocab.items():
+				if k in overlapVocab:
+					overlap += v
+
+		if overlap == 0 or total == 0:
+			return set([]), 0
+		else:	
+			ratio = overlap/total
+			return overlapVocab, ratio
+
 	def transform(self, corpus: Corpus):
 
 		stop_words = set(stopwords.words('english'))
@@ -53,22 +76,13 @@ class VocabOverlap(Transformer):
 				for token in tokens:
 					vocabs[utt.user.name][token] += 1
 
-			
-			overlapVocab = set(list(vocabs.values())[0])
-			for u, vocab in vocabs.items():
-				overlapVocab = overlapVocab.intersection(set(vocab))
+				overlapVocab, ratio = self._compute_overlap(vocabs)	
+				utt.add_meta('vocabulary_overlap', {'vocab': overlapVocab, 'ratio': ratio})
 	
 			# Compute frequency of overlaps and total number of tokens
-			overlap = 0
-			total = 0
-			for vocab in vocabs.values():
-				total += sum(vocab.values())
-				for k, v in vocab.items():
-					if k in overlapVocab:
-						overlap += v
+			overlapVocab, ratio = self._compute_overlap(vocabs)
 		
-			convo.add_meta('vocabulary_overlap', {'vocab': overlapVocab, \
-				'ratio': overlap/total})
+			convo.add_meta('vocabulary_overlap', {'vocab': overlapVocab, 'ratio': ratio})
 
 	
 		return corpus
