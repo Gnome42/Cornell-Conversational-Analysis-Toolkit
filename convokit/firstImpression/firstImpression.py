@@ -41,17 +41,46 @@ class FirstImpression(Transformer):
 		# overlap of vocabulary is a conversation-level metric
 		for convo in corpus.iter_conversations():
 	
+			# Compute polarity scores of each statement (set of utterances)
+			users = convo.get_usernames()
+			curr_user = users[0] # Current user
+			curr_statement = [] # Current statement
+			curr_utts = [] # Current list of utterances
+
+			# Compute polarity score for the first 10% of the conversation
+			for utt in convo.iter_utterances():
+		
+				# Tokenize via NLTK tokenizer
+				tokens = self._tokenize_utt(utt.text)
+						
+				if utt.user.name == curr_user: # Utterance belongs to current user
+					curr_utts.append(utt)
+					curr_statement += tokens
+				else: # Utterance belongs to another user
+
+					# Compute polarity scores for current statement
+					scores = sid.polarity_scores(' '.join(curr_statement))
+					for u in curr_utts:
+						u.add_meta('polarity', scores)
+
+					# Move on to next user
+					curr_user = utt.user.name
+					curr_statement = tokens
+					curr_utts = [utt]
+
+
+
 			total_length = 0
 			for utt in convo.iter_utterances():
 				total_length += len(self._tokenize_utt(utt.text))
 
 
-			users = convo.get_usernames()
 			first_impressions = {u:defaultdict(float) for u in users}
 			curr_user = users[0] # Current user
 			curr_statement = [] # Current statement
 			curr_length = 0 # How many tokens are covered so far
-			
+
+			# Compute polarity score for the first 10% of the conversation
 			for utt in convo.iter_utterances():
 		
 				# Tokenize via NLTK tokenizer
@@ -61,6 +90,7 @@ class FirstImpression(Transformer):
 					curr_statement += tokens
 				else: # Utterance belongs to another user
 
+					# Compute polarity scores for current statement
 					scores = sid.polarity_scores(' '.join(curr_statement))
 					for k, v in scores.items():
 						first_impressions[curr_user][k] += v
