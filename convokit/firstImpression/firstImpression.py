@@ -16,6 +16,9 @@ class FirstImpression(Transformer):
 		- compound: An overall polarity score measured with token-level heuristics and 
 					parameters from VADER. This value ranges from -1 (extremely negative) to 
 					1 (extremely positive).
+	In addition to the conversation-level first impression, the sentiment of each statement
+	made in the conversation is also stored in the utterance-level metadata. Here,
+	a statement is consistent of consecutive utterances from the same user.
 	"""
 
 	def __init__(self):

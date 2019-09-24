@@ -14,6 +14,9 @@ class VocabOverlap(Transformer):
 
 	This metric is added to the conversation-level metadata under 'vocabulary_overlap'
 	and has a value between 0 (no overlap at all) and 1 (all tokens overlap)
+
+	In addition, the overlap of vocabularies up to a certain point in a conversation 
+	is stored in the utterance-level metadata.
 	"""
 
 	def __init__(self):
