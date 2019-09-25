@@ -41,7 +41,6 @@ class VaderSentiment(Transformer):
 
 		sid = SentimentIntensityAnalyzer()
 
-		# overlap of vocabulary is a conversation-level metric
 		for convo in corpus.iter_conversations():
 	
 			# Compute polarity scores of each statement (set of utterances)
@@ -71,6 +70,10 @@ class VaderSentiment(Transformer):
 					curr_statement = tokens
 					curr_utts = [utt]
 
+			# flush out remaining scores
+			scores = sid.polarity_scores(' '.join(curr_statement))
+			for u in curr_utts:
+				u.add_meta('polarity', scores)
 
 
 			total_length = 0
