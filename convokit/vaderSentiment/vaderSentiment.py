@@ -6,11 +6,11 @@ from nltk.sentiment.util import *
 from collections import defaultdict
 import numpy as np
 
-class FirstImpression(Transformer):
+class VaderSentiment(Transformer):
 	"""
 	Performs sentiment analysis on the first 10% of conversations with a pretrained
 	NLTK VADER analyzer. The sentiment of each user is stored on the conversation-level
-	metadata under 'first_impression', and each sentiment is composed of 4 entries:
+	metadata under 'initial_sentiment', and each sentiment is composed of 4 entries:
 		- neg/neu/pos: the negative/neutral/positive sentiments. They range from 0
 					to 1, and sum up to 1.
 		- compound: An overall polarity score measured with token-level heuristics and 
@@ -78,7 +78,7 @@ class FirstImpression(Transformer):
 				total_length += len(self._tokenize_utt(utt.text))
 
 
-			first_impressions = {u:defaultdict(float) for u in users}
+			initial_sentiment = {u:defaultdict(float) for u in users}
 			curr_user = users[0] # Current user
 			curr_statement = [] # Current statement
 			curr_length = 0 # How many tokens are covered so far
@@ -96,7 +96,7 @@ class FirstImpression(Transformer):
 					# Compute polarity scores for current statement
 					scores = sid.polarity_scores(' '.join(curr_statement))
 					for k, v in scores.items():
-						first_impressions[curr_user][k] += v
+						initial_sentiment[curr_user][k] += v
 
 					# Move on to next user
 					curr_user = utt.user.name
@@ -110,14 +110,14 @@ class FirstImpression(Transformer):
 
 				
 			# Take the average if multiple statements are counted
-			for user in first_impressions.keys():
-				num_statements = first_impressions[user]['neg'] + \
-					first_impressions[user]['neu'] + first_impressions[user]['pos']
+			for user in initial_sentiment.keys():
+				num_statements = initial_sentiment[user]['neg'] + \
+					initial_sentiment[user]['neu'] + initial_sentiment[user]['pos']
 				if num_statements != 0:
-					for k in first_impressions[user].keys():
-						first_impressions[user][k] /= num_statements
+					for k in initial_sentiment[user].keys():
+						initial_sentiment[user][k] /= num_statements
 
-			convo.add_meta('first_impression', first_impressions)
+			convo.add_meta('initial_sentiment', initial_sentiment)
 
 	
 		return corpus
