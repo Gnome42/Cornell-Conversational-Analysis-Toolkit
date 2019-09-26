@@ -8,14 +8,21 @@ class ConversationBalance(Transformer):
 	Calculates the balance of a conversation by computing the ratio of tokens 
 	spoken between a pair of users. The Conversation-level balance is defined 
 	in conversation metadata for each pair of users (A,B) as the ratio: 
-			(# tokens by A)/(# tokens by A + # tokens by B)
+			2 * min( x, y )/( x + y )
+
+	Where x is the number of tokens spoken by A and y is the number of tokens
+	spoken by B. Thus, imbalance can be seen as a lower score, and good balance 
+	is closer to 1.
+
 	This is stored as a Numpy array of size NxN, where N is the number of Users.
 	In cell (X, Y) of the array is the balance between users X and Y. 
 
 	Additionally, statement-pair balance is computed. We define statements as
 	groups of consecutive utterances spoken by the same user. The balance
-	between two consecutive statements (a, b) is a:b and is stored in the 
-	utterance metadata of the first utterance in statement a.
+	between two consecutive statements (a, b) is stored in the 
+	utterance metadata of the first utterance in statement a. It is calclated
+	using the same formula as above, but with user A being the current speaker
+	and user B being the following speaker.
 
 	"""
 
@@ -77,16 +84,16 @@ class ConversationBalance(Transformer):
 				next_len = corpus.utterances[utt_id_next].meta['statement_len']
 
 				if cur_len+next_len == 0:
-				 	sment_balance = 0.5
+				 	sment_balance = 1
 				else:
-					sment_balance = cur_len/(cur_len+next_len)
+					sment_balance = 2*min(cur_len, next_len)/(cur_len+next_len)
 				corpus.utterances[utt_id_cur].meta['statement_balance'] = sment_balance
 
 			# Update conversation-level metadata with balance ratio
 			convo_balance = np.zeros((len(user_order), len(user_order)))
 			for i, A in enumerate(user_order):
 				for j, B in enumerate(user_order):
-					convo_balance[i,j] = user_tokens[A]/(user_tokens[A]+user_tokens[B])
+					convo_balance[i,j] = 2*min(user_tokens[A], user_tokens[B])/(user_tokens[A]+user_tokens[B])
 			c._meta['conversation_balance'] = convo_balance
 
 			# Add the usernames to the conversation metadata
