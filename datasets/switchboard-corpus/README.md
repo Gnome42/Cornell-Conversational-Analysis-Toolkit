@@ -23,12 +23,14 @@ For each utterance, we include:
 * timestamp: timestamp of the utterance (not applicable in Switchboard, set to *None*)
 * text: text of the utterance
 * metadata
-  * tag: the DAMSL act-tag of the utterance
+  * tag: a dictionary with segments of the utterance text as keys and the DAMSL act-tag of the utterance as values
   * pos: the part-of-speech tagged portion of the utterance
-  * trees: nltk-parsed tree of the utterance
+  * trees: a dictionary with segments of the utterance text as keys and the nltk-parsed tree of the utterance as values
+  
+*Note:* In the original switchboard dataset, utterances are not separated by user, but rather by tags. This means that consecutive utterances could have been said by the same user. In the ConvoKit Corpus, we changed this so that each utterance in our corpus is a collection of the consecutive sub-utterances said by one person. The metadata on each utterance is combined from the sub-utterances of the original dataset, so that it is clear which POS and DAMSL tags correspond with which parts of each utterance.
 
 ### Conversation-Level Information
-Conversations are indexed by the first ID of the conversation (i.e. 4325-0, 2451-0, 4171-0, etc). The conversation IDs can be found using: 
+Conversations are indexed by the original switchboard dataset IDs (i.e. 4325, 2451, 4171, etc). The conversation IDs can be found using: 
 ```convo_ids = swda_corpus.get_conversation_ids()```
 
 ### Corpus-Level Information
@@ -47,7 +49,7 @@ To download the corpus:
 >>> corpus = Corpus(filename=download("switchboard-corpus"))
 ```
 
-In this dataset, there are 440 users, 221616 utterances, and 1155 conversations.
+In this dataset, there are 440 users, 122646 utterances, and 1155 conversations.
 
 ### Contact Information
 Corpus translated into ConvoKit format by [Nathan Mislang](mailto:ntm39@cornell.edu), [Noam Eshed](mailto:ne236@cornell.edu), and [Sungjun Cho](mailto:sc782@cornell.edu).
