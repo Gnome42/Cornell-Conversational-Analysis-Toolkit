@@ -1,6 +1,6 @@
 
 # Switchboard Telephone Conversation Corpus
-Switchboard (or SWDA) contains 1155 five-minute telephone conversations between two participants. Callers question receivers on provided topics, such as child care, recycling, and news media. 440 users participate in these 1155 conversations, producing 221616 utterances. 
+Switchboard (or SWDA) contains 1155 five-minute telephone conversations between two participants. Callers question receivers on provided topics, such as child care, recycling, and news media. 440 users participate in these 1155 conversations, producing 221616 utterances (we combine consecutive utterances by the same person into one utterance, so our corpus has 122646 utterances). 
 
 You should pull the repo at [https://github.com/cgpotts/swda](https://github.com/cgpotts/swda) in order to download the dataset and helper functions necessary to create the corpus.
 
