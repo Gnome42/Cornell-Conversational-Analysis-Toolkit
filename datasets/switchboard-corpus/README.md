@@ -1,18 +1,24 @@
 
-# Switchboard Telephone Conversation Corpus
-Switchboard (or SWDA) contains 1155 five-minute telephone conversations between two participants. Callers question receivers on provided topics, such as child care, recycling, and news media. 440 users participate in these 1155 conversations, producing 221616 utterances (we combine consecutive utterances by the same person into one utterance, so our corpus has 122646 utterances). 
+# Switchboard Dialog Act Corpus (SwDA)
+The Switchboard Dialog Act Corpus (SWDA) contains 1,155 five-minute telephone conversations between two participants. Callers question receivers on provided topics, such as child care, recycling, and news media. 440 users participate in these 1,155 conversations, producing 221,616 utterances (we combine consecutive utterances by the same person into one utterance, so our corpus has 122,646 utterances). 
 
 You should pull the repo at [https://github.com/cgpotts/swda](https://github.com/cgpotts/swda) in order to download the dataset and helper functions necessary to create the corpus.
 
-The original dataset, paper, and accompanying information can be found at [http://compprag.christopherpotts.net/swda.html](http://compprag.christopherpotts.net/swda.html). 
+The original paper is [Dialogue act modeling for automatic tagging and recognition of conversational speech](https://web.stanford.edu/~jurafsky/ws97/CL-dialog.pdf).
+
+
+The original dataset and additional information can be found at [http://compprag.christopherpotts.net/swda.html](http://compprag.christopherpotts.net/swda.html). 
 
 ## Dataset Details
 ### User-Level Information
-In this dataset, users are the participants in the phone conversations (two per conversation). The user index is the same as that in the original dataset. We also provide the following user information in the metadata:
+In this dataset, users are the participants in the phone conversations (two per conversation). The user's name is the same as the ID used in the original SwDA dataset. We also provide the following user information in the metadata:
 * sex: user sex, 'MALE' or 'FEMALE'
 * education: the user's level of education. Options are 0 (less than high school), 1 (less than college), 2 (college), 3 (more than college), and 9 (unknown).
 * birth_year: the user's birth year (4-digit year)
 * dialect_area: one of the following dialect areas: MIXED, NEW ENGLAND, NORTH MIDLAND, NORTHERN, NYC, SOUTH MIDLAND, SOUTHERN, UNK, WESTERN
+    * The UNK tag is used for users of unknown dialect area
+    * The MIXED tag is used for users who are of multiple dialect areas
+
 
 ### Utterance-Level Information
 For each utterance, we include:
@@ -20,17 +26,15 @@ For each utterance, we include:
 * user: the User giving the utterance
 * root: id of the root utterance of the conversation. For example, the root of the utterance with ID 4325-1 would be 4325-0.
 * reply_to: id of the utterance this replies to
-* timestamp: timestamp of the utterance (not applicable in Switchboard, set to *None*)
+* timestamp: timestamp of the utterance (not applicable in SwDA, set to *None*)
 * text: text of the utterance
 * metadata
   * tag: a dictionary with segments of the utterance text as keys and the DAMSL act-tag of the utterance as values
   * pos: the part-of-speech tagged portion of the utterance
   * trees: a dictionary with segments of the utterance text as keys and the nltk-parsed tree of the utterance as values
-  
-*Note:* In the original switchboard dataset, utterances are not separated by user, but rather by tags. This means that consecutive utterances could have been said by the same user. In the ConvoKit Corpus, we changed this so that each utterance in our corpus is a collection of the consecutive sub-utterances said by one person. The metadata on each utterance is combined from the sub-utterances of the original dataset, so that it is clear which POS and DAMSL tags correspond with which parts of each utterance.
 
 ### Conversation-Level Information
-Conversations are indexed by the original switchboard dataset IDs (i.e. 4325, 2451, 4171, etc). The conversation IDs can be found using: 
+Conversations are indexed by the original SwDa dataset IDs (i.e. 4325, 2451, 4171, etc). The conversation IDs can be found using: 
 ```convo_ids = swda_corpus.get_conversation_ids()```
 
 ### Corpus-Level Information
@@ -50,6 +54,14 @@ To download the corpus:
 ```
 
 In this dataset, there are 440 users, 122646 utterances, and 1155 conversations.
+
+## Additional Information
+
+*Note:* In the original SwDa dataset, utterances are not separated by user, but rather by tags. This means that consecutive utterances could have been said by the same user. In the ConvoKit Corpus, we changed this so that each utterance in our corpus is a collection of the consecutive sub-utterances said by one person. The metadata on each utterance is combined from the sub-utterances of the original dataset, so that it is clear which POS and DAMSL tags correspond with which parts of each utterance.
+
+### Related Publication
+Stolcke, Andreas, Ries, Klaus, Coccaro, Noah, Shriberg, Elizabeth, Bates, Rebecca, Jurafsky, Daniel, Taylor, Paul, Martin, Rachel, Meteer, Marie, and Van Ess-Dykema, Carol. 2000. [Dialogue act modeling for automatic tagging and recognition of conversational speech](https://web.stanford.edu/~jurafsky/ws97/CL-dialog.pdf). Computational Linguistics 26(3): 339–371.
+
 
 ### Contact Information
 Corpus translated into ConvoKit format by [Nathan Mislang](mailto:ntm39@cornell.edu), [Noam Eshed](mailto:ne236@cornell.edu), and [Sungjun Cho](mailto:sc782@cornell.edu).
