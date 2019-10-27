@@ -53,7 +53,7 @@ To download the corpus:
 >>> corpus = Corpus(filename=download("switchboard-corpus"))
 ```
 
-In this dataset, there are 440 users, 122646 utterances, and 1155 conversations.
+In this dataset, there are 440 users, 122,646 utterances, and 1,155 conversations.
 
 ## Additional Information
 
