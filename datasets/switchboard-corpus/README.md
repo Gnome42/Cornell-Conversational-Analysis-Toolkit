@@ -35,7 +35,7 @@ For each utterance, we include:
 Conversations are indexed by the original SwDa dataset IDs (i.e. 4325, 2451, 4171, etc). The conversation IDs can be found using: 
 ```convo_ids = swda_corpus.get_conversation_ids()```
 
-* talk_day: the datet of the conversation
+* talk_day: the date of the conversation
 * topic_description: a short description of the conversation prompt
 * length: length of the conversation in minutes
 * prompt: a long description of the conversation prompt
