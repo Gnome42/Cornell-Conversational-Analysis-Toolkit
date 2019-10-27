@@ -62,6 +62,8 @@ In this dataset, there are 440 users, 122646 utterances, and 1155 conversations.
 ### Related Publication
 Stolcke, Andreas, Ries, Klaus, Coccaro, Noah, Shriberg, Elizabeth, Bates, Rebecca, Jurafsky, Daniel, Taylor, Paul, Martin, Rachel, Meteer, Marie, and Van Ess-Dykema, Carol. 2000. [Dialogue act modeling for automatic tagging and recognition of conversational speech](https://web.stanford.edu/~jurafsky/ws97/CL-dialog.pdf). Computational Linguistics 26(3): 339–371.
 
+### Licensing Information
+The SWDA Switchboard work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (see source [here](http://compprag.christopherpotts.net/swda.html))
 
 ### Contact Information
 Corpus translated into ConvoKit format by [Nathan Mislang](mailto:ntm39@cornell.edu), [Noam Eshed](mailto:ne236@cornell.edu), and [Sungjun Cho](mailto:sc782@cornell.edu).
