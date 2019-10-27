@@ -52,9 +52,6 @@ To download the corpus:
 >>> from convokit import Corpus, download
 >>> corpus = Corpus(filename=download("switchboard-corpus"))
 >>> corpus.print_summary_stats()
-```
-
-```python
 Number of Users: 440
 Number of Utterances: 122646
 Number of Conversations: 1155
