@@ -30,8 +30,6 @@ For each utterance, we include:
 * text: text of the utterance
 * metadata
   * tag: a dictionary with segments of the utterance text as keys and the DAMSL act-tag of the utterance as values
-  * pos: the part-of-speech tagged portion of the utterance
-  * trees: a dictionary with segments of the utterance text as keys and the nltk-parsed tree of the utterance as values
 
 ### Conversation-Level Information
 Conversations are indexed by the original SwDa dataset IDs (i.e. 4325, 2451, 4171, etc). The conversation IDs can be found using: 
@@ -51,9 +49,11 @@ To download the corpus:
 ```python
 >>> from convokit import Corpus, download
 >>> corpus = Corpus(filename=download("switchboard-corpus"))
+>>> corpus.print_summary_stats()
+Number of Users: 440
+Number of Utterances: 122646
+Number of Conversations: 1155
 ```
-
-In this dataset, there are 440 users, 122646 utterances, and 1155 conversations.
 
 ## Additional Information
 
@@ -62,6 +62,8 @@ In this dataset, there are 440 users, 122646 utterances, and 1155 conversations.
 ### Related Publication
 Stolcke, Andreas, Ries, Klaus, Coccaro, Noah, Shriberg, Elizabeth, Bates, Rebecca, Jurafsky, Daniel, Taylor, Paul, Martin, Rachel, Meteer, Marie, and Van Ess-Dykema, Carol. 2000. [Dialogue act modeling for automatic tagging and recognition of conversational speech](https://web.stanford.edu/~jurafsky/ws97/CL-dialog.pdf). Computational Linguistics 26(3): 339–371.
 
+### Licensing Information
+The SWDA Switchboard work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (see source [here](http://compprag.christopherpotts.net/swda.html))
 
 ### Contact Information
 Corpus translated into ConvoKit format by [Nathan Mislang](mailto:ntm39@cornell.edu), [Noam Eshed](mailto:ne236@cornell.edu), and [Sungjun Cho](mailto:sc782@cornell.edu).
