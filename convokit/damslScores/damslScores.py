@@ -28,15 +28,17 @@ class DAMSLScores(Transformer):
 
 		for convo in corpus.iter_conversations():
 	
-			length = len(convo.get_utterance_ids())
-			score = 0    
+			scores = []
 	
 			for utt in convo.iter_utterances():
-				try:
-					score += self.rubric[utt.meta['tag']]
-				except KeyError:
-					continue
+				
+				tags = [pair[1] for pair in utt.meta['tag']]
+				for tag in tags:
+					try:
+						scores.append(self.rubric[tag])
+					except KeyError:
+						continue
 		
-			convo.add_meta('damsl_score', score/length)
+			convo.add_meta('damsl_score', np.mean(scores))
 	
 		return corpus
