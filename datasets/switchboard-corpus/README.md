@@ -30,8 +30,6 @@ For each utterance, we include:
 * text: text of the utterance
 * metadata
   * tag: a dictionary with segments of the utterance text as keys and the DAMSL act-tag of the utterance as values
-  * pos: the part-of-speech tagged portion of the utterance
-  * trees: a dictionary with segments of the utterance text as keys and the nltk-parsed tree of the utterance as values
 
 ### Conversation-Level Information
 Conversations are indexed by the original SwDa dataset IDs (i.e. 4325, 2451, 4171, etc). The conversation IDs can be found using: 
