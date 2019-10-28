@@ -4,7 +4,8 @@ The Switchboard Dialog Act Corpus (SWDA) contains 1,155 five-minute telephone co
 
 You should pull the repo at [https://github.com/cgpotts/swda](https://github.com/cgpotts/swda) in order to download the dataset and helper functions necessary to create the corpus.
 
-Original paper: Stolcke, Andreas, Ries, Klaus, Coccaro, Noah, Shriberg, Elizabeth, Bates, Rebecca, Jurafsky, Daniel, Taylor, Paul, Martin, Rachel, Meteer, Marie, and Van Ess-Dykema, Carol. 2000. [Dialogue act modeling for automatic tagging and recognition of conversational speech](https://web.stanford.edu/~jurafsky/ws97/CL-dialog.pdf). Computational Linguistics 26(3): 339–371.
+Original paper: Andreas Stolcke, Klaus Ries, Noah Coccaro, Elizabeth Shriberg, Rebecca Bates, Daniel Jurafsky, Paul Taylor, Rachel Martin, Carol Van Ess-Dykema, and Marie Meteer. **Dialogue act modeling for automatic tagging and recognition of conversational speech**. Computational Linguistics, Volume 26, Number 3, September 2000.
+[https://www.aclweb.org/anthology/J00-3003.pdf](https://www.aclweb.org/anthology/J00-3003.pdf)
 
 The original dataset and additional information can be found at [http://compprag.christopherpotts.net/swda.html](http://compprag.christopherpotts.net/swda.html). 
 
