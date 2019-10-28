@@ -4,8 +4,7 @@ The Switchboard Dialog Act Corpus (SWDA) contains 1,155 five-minute telephone co
 
 You should pull the repo at [https://github.com/cgpotts/swda](https://github.com/cgpotts/swda) in order to download the dataset and helper functions necessary to create the corpus.
 
-The original paper is [Dialogue act modeling for automatic tagging and recognition of conversational speech](https://web.stanford.edu/~jurafsky/ws97/CL-dialog.pdf).
-
+Original paper: Stolcke, Andreas, Ries, Klaus, Coccaro, Noah, Shriberg, Elizabeth, Bates, Rebecca, Jurafsky, Daniel, Taylor, Paul, Martin, Rachel, Meteer, Marie, and Van Ess-Dykema, Carol. 2000. [Dialogue act modeling for automatic tagging and recognition of conversational speech](https://web.stanford.edu/~jurafsky/ws97/CL-dialog.pdf). Computational Linguistics 26(3): 339–371.
 
 The original dataset and additional information can be found at [http://compprag.christopherpotts.net/swda.html](http://compprag.christopherpotts.net/swda.html). 
 
@@ -48,6 +47,10 @@ To download the corpus:
 ```python
 >>> from convokit import Corpus, download
 >>> corpus = Corpus(filename=download("switchboard-corpus"))
+```
+
+For quick statistics:
+```python
 >>> corpus.print_summary_stats()
 Number of Users: 440
 Number of Utterances: 122646
@@ -57,9 +60,6 @@ Number of Conversations: 1155
 ## Additional Information
 
 *Note:* In the original SwDa dataset, utterances are not separated by user, but rather by tags. This means that consecutive utterances could have been said by the same user. In the ConvoKit Corpus, we changed this so that each utterance in our corpus is a collection of the consecutive sub-utterances said by one person. The metadata on each utterance is combined from the sub-utterances of the original dataset, so that it is clear which POS and DAMSL tags correspond with which parts of each utterance.
-
-### Related Publication
-Stolcke, Andreas, Ries, Klaus, Coccaro, Noah, Shriberg, Elizabeth, Bates, Rebecca, Jurafsky, Daniel, Taylor, Paul, Martin, Rachel, Meteer, Marie, and Van Ess-Dykema, Carol. 2000. [Dialogue act modeling for automatic tagging and recognition of conversational speech](https://web.stanford.edu/~jurafsky/ws97/CL-dialog.pdf). Computational Linguistics 26(3): 339–371.
 
 ### Licensing Information
 The SWDA Switchboard work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (see source [here](http://compprag.christopherpotts.net/swda.html))
