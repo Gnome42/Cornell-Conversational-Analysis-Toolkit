@@ -32,7 +32,7 @@ For each utterance, we include:
   * tag: a dictionary with segments of the utterance text as keys and the DAMSL act-tag of the utterance as values
 
 ### Conversation-Level Information
-Conversations are indexed by the original SwDa dataset IDs (i.e. 4325, 2451, 4171, etc). The conversation IDs can be found using: 
+Conversations are indexed by the root of the original SwDa dataset IDs (i.e. 4325-0, 2451-0, 4171-0, etc). The conversation IDs can be found using: 
 ```convo_ids = swda_corpus.get_conversation_ids()```
 
 * talk_day: the date of the conversation
