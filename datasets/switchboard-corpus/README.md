@@ -1,6 +1,6 @@
 
 # Switchboard Dialog Act Corpus (SwDA)
-The Switchboard Dialog Act Corpus (SWDA) contains 1,155 five-minute telephone conversations between two participants. Callers question receivers on provided topics, such as child care, recycling, and news media. 440 users participate in these 1,155 conversations, producing 221,616 utterances (we combine consecutive utterances by the same person into one utterance, so our corpus has 122,646 utterances). 
+The Switchboard Dialog Act Corpus (SwDA) contains 1,155 five-minute telephone conversations between two participants. Callers question receivers on provided topics, such as child care, recycling, and news media. 440 users participate in these 1,155 conversations, producing 221,616 utterances (we combine consecutive utterances by the same person into one utterance, so our corpus has 122,646 utterances). 
 
 You should pull the repo at [https://github.com/cgpotts/swda](https://github.com/cgpotts/swda) in order to download the dataset and helper functions necessary to create the corpus.
 
@@ -32,9 +32,10 @@ For each utterance, we include:
   * tag: a dictionary with segments of the utterance text as keys and the DAMSL act-tag of the utterance as values
 
 ### Conversation-Level Information
-Conversations are indexed by the root of the original SwDa dataset IDs (i.e. 4325-0, 2451-0, 4171-0, etc). The conversation IDs can be found using: 
+Conversations are indexed by the root of the original SwDA dataset IDs (i.e. 4325-0, 2451-0, 4171-0, etc). The conversation IDs can be found using: 
 ```convo_ids = swda_corpus.get_conversation_ids()```
 
+* filename: the name of corresponding file in the original SwDA dataset
 * talk_day: the date of the conversation
 * topic_description: a short description of the conversation prompt
 * length: length of the conversation in minutes
@@ -60,10 +61,10 @@ Number of Conversations: 1155
 
 ## Additional Information
 
-*Note:* In the original SwDa dataset, utterances are not separated by user, but rather by tags. This means that consecutive utterances could have been said by the same user. In the ConvoKit Corpus, we changed this so that each utterance in our corpus is a collection of the consecutive sub-utterances said by one person. The metadata on each utterance is combined from the sub-utterances of the original dataset, so that it is clear which POS and DAMSL tags correspond with which parts of each utterance.
+*Note:* In the original SwDA dataset, utterances are not separated by user, but rather by tags. This means that consecutive utterances could have been said by the same user. In the ConvoKit Corpus, we changed this so that each utterance in our corpus is a collection of the consecutive sub-utterances said by one person. The metadata on each utterance is combined from the sub-utterances of the original dataset, so that it is clear which POS and DAMSL tags correspond with which parts of each utterance.
 
 ### Licensing Information
-The SWDA Switchboard work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (see source [here](http://compprag.christopherpotts.net/swda.html))
+The SwDA Switchboard work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (see source [here](http://compprag.christopherpotts.net/swda.html))
 
 ### Contact Information
 Corpus translated into ConvoKit format by [Nathan Mislang](mailto:ntm39@cornell.edu), [Noam Eshed](mailto:ne236@cornell.edu), and [Sungjun Cho](mailto:sc782@cornell.edu).
